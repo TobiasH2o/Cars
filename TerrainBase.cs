@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Cars
 {
-    internal class Armour : Component
+    internal class TerrainBase
+
     {
-        public Armour(int Width, int Height) : base(Width, Height)
-        {
-        }
+        private bool Destructable;
+        private int Xpos;
+        private int Ypos;
     }
 }

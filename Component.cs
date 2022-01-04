@@ -8,11 +8,23 @@ namespace Cars
 {
     internal class Component
     {
-        public int TotalHealth { get; protected set; }
+        public int Width { get; private set; }
+
+        public int Height { get; private set; }
+
+        public int TotalHealth
+        { get { return Width * Height; } }
+
         public int DamagedHealth { get; protected set; }
 
         public bool Destroyed
         { get { return TotalHealth == DamagedHealth; } }
+
+        public Component(int Width, int Height)
+        {
+            this.Width = Width;
+            this.Height = Height;
+        }
 
         public void Damage(int Damage)
         {

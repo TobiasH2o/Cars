@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Cars
 {
-    internal class Armour : Component
+    internal class WeaponSlot : Component
     {
-        public Armour(int Width, int Height) : base(Width, Height)
-        {
-        }
+        public bool traps { get; protected set; }
+        public bool turret { get; protected set; }
     }
 }

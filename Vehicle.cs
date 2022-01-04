@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Cars
 {
-    internal class Armour : Component
+    internal class Vehicle
     {
-        public Armour(int Width, int Height) : base(Width, Height)
+        public Vehicle()
         {
         }
     }
