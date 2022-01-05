@@ -30,14 +30,18 @@ namespace Cars
             // Forward
             int xOffset = 50;
             int yOffset = 50;
-            int SquareSize = 10;
+            int SquareSize = 20;
+            int SquareCount = 0;
             if (vehicle.For.End)
                 for (int x = 0; x < vehicle.For.EndA.Width; x++)
                 {
                     for (int y = 0; y < vehicle.For.EndA.Height; y++)
                     {
                         PictureBox square = new PictureBox();
-                        square.BackColor = Color.RosyBrown;
+                        if (SquareCount < vehicle.For.EndA.DamagedHealth)
+                            square.BackColor = Color.RosyBrown;
+                        else square.BackColor = Color.GhostWhite;
+                        SquareCount++;
                         square.Location = new Point((x * (SquareSize + SquareSize / 5)) + xOffset, (y * (SquareSize + SquareSize / 5)) + yOffset);
                         square.Size = new Size(SquareSize, SquareSize);
                         square.Visible = true;
