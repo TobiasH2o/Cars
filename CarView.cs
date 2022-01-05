@@ -91,10 +91,5 @@ namespace Cars
                 }
             }
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            vehicle.For.EndA.Damage(0.5);
-        }
     }
 }
