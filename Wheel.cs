@@ -10,8 +10,9 @@ namespace Cars
     {
         public double SpeedModifier { get; protected set; }
 
-        public Wheel(int SpeedModifier, int width, int height)
+        public Wheel(int Width, int Height, double SpeedModifier) : base(Width, Height)
         {
+            this.SpeedModifier = SpeedModifier;
         }
     }
 }

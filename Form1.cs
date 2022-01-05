@@ -15,6 +15,7 @@ namespace Cars
         public Form1()
         {
             InitializeComponent();
+            Vehicle v = new Vehicle();
         }
     }
 }

@@ -10,5 +10,9 @@ namespace Cars
     {
         public bool traps { get; protected set; }
         public bool turret { get; protected set; }
+
+        public WeaponSlot(int Width, int Height) : base(Width, Height)
+        {
+        }
     }
 }
