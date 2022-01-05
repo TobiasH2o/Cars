@@ -11,24 +11,28 @@ namespace Cars
         public Section For { get; private set; }
         public Section Mid { get; private set; }
         public Section Rear { get; private set; }
+        public int Height { get; private set; } = -1;
+        public int Width { get; private set; } = -1;
 
         public Vehicle()
         {
             For = new Section(
-                LeftA: new Tuple<int, int>(2, 8),
-                RightA: new Tuple<int, int>(2, 8),
-                LeftW: new Tuple<int, int, double>(2, 3, 0.15),
-                RightW: new Tuple<int, int, double>(2, 3, 0.15),
-                EndA: new Tuple<int, int>(3, 12));
+                LeftA: new Tuple<int, int>(8, 2),
+                RightA: new Tuple<int, int>(8, 2),
+                LeftW: new Tuple<int, int, double>(3, 1, 0.15),
+                RightW: new Tuple<int, int, double>(3, 1, 0.15),
+                EndA: new Tuple<int, int>(2, 18));
             Mid = new Section(
-                LeftA: new Tuple<int, int>(2, 6),
-                RightA: new Tuple<int, int>(2, 6));
+                LeftA: new Tuple<int, int>(10, 2),
+                RightA: new Tuple<int, int>(10, 2));
             Rear = new Section(
-                LeftA: new Tuple<int, int>(2, 8),
-                RightA: new Tuple<int, int>(2, 8),
-                LeftW: new Tuple<int, int, double>(2, 3, 0.15),
-                RightW: new Tuple<int, int, double>(2, 3, 0.15),
-                EndA: new Tuple<int, int>(12, 1));
+                LeftA: new Tuple<int, int>(10, 2),
+                RightA: new Tuple<int, int>(10, 1),
+                LeftW: new Tuple<int, int, double>(3, 2, 0.15),
+                RightW: new Tuple<int, int, double>(3, 2, 0.15),
+                EndA: new Tuple<int, int>(1, 12));
+            Height = Math.Max(For.EndA.Height, Rear.EndA.Height);
+            Width = For.Width + Mid.Width + Rear.Width;
         }
     }
 }

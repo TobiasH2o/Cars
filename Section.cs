@@ -9,14 +9,16 @@ namespace Cars
     public class Section
     {
         public bool End;
+        public int Width;
         public Armour LeftA;
         public Armour RightA;
         public Armour EndA;
         public Wheel LeftW;
         public Wheel RightW;
 
-        public Section(Tuple<int, int> LeftA, Tuple<int, int> RightA, Tuple<int, int, double> LeftW = null, Tuple<int, int, double> RightW = null, Tuple<int, int> EndA = null)
+        public Section(Tuple<int, int> LeftA, Tuple<int, int> RightA, Tuple<int, int, double> LeftW = null, Tuple<int, int, double> RightW = null, Tuple<int, int> EndA = null, int? Width = null)
         {
+            this.Width = Width ?? Math.Max(LeftA.Item1, RightA.Item1);
             EndA = EndA ?? new Tuple<int, int>(0, 0);
             LeftW = LeftW ?? new Tuple<int, int, double>(0, 0, 0);
             RightW = RightW ?? new Tuple<int, int, double>(0, 0, 0);
