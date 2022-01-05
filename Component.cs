@@ -15,7 +15,7 @@ namespace Cars
         public int TotalHealth
         { get { return Width * Height; } }
 
-        public int DamagedHealth { get; protected set; }
+        public double DamagedHealth { get; protected set; }
 
         public bool Destroyed
         { get { return TotalHealth == DamagedHealth; } }
@@ -26,7 +26,7 @@ namespace Cars
             this.Height = Height;
         }
 
-        public void Damage(int Damage)
+        public void Damage(double Damage)
         {
             if (!Destroyed)
             {

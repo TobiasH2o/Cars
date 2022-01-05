@@ -13,7 +13,6 @@ namespace Cars
     public partial class CarView : Form
     {
         private readonly Vehicle vehicle;
-        private List<PictureBox> DamageSquares = new List<PictureBox>(50);
         private int EdgeSpacing = 25;
         private int SquareSize = 18;
         private int SquareSpacing = 5;
@@ -45,7 +44,6 @@ namespace Cars
 
         public void InitialRender()
         {
-            DamageSquares.Clear();
             Controls.Clear();
             // Forward
             int DefaultY = (Height / 2) - ((vehicle.For.EndA.Height * (SquareSize + SquareSize / SquareSpacing)) / 2) - SquareSize / 2;
@@ -75,6 +73,7 @@ namespace Cars
         private void InitializeArmour(Armour armour, int xOffset, int yOffset)
         {
             int SquareCount = 0;
+            armour.ClearHealthSquares();
             for (int x = 0; x < armour.Width; x++)
             {
                 for (int y = 0; y < armour.Height; y++)
@@ -88,9 +87,14 @@ namespace Cars
                     square.Size = new Size(SquareSize, SquareSize);
                     square.Visible = true;
                     Controls.Add(square);
-                    DamageSquares.Add(square);
+                    armour.AddHealthSquare(square);
                 }
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            vehicle.For.EndA.Damage(0.5);
         }
     }
 }
