@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Cars
 {
-    internal class Section
+    public class Section
     {
-        private bool End;
-        private Armour LeftA;
-        private Armour RightA;
-        private Armour EndA;
-        private Wheel LeftW;
-        private Wheel RightW;
+        public bool End;
+        public Armour LeftA;
+        public Armour RightA;
+        public Armour EndA;
+        public Wheel LeftW;
+        public Wheel RightW;
 
         public Section(Tuple<int, int> LeftA, Tuple<int, int> RightA, Tuple<int, int, double> LeftW = null, Tuple<int, int, double> RightW = null, Tuple<int, int> EndA = null)
         {
             EndA = EndA ?? new Tuple<int, int>(0, 0);
             LeftW = LeftW ?? new Tuple<int, int, double>(0, 0, 0);
             RightW = RightW ?? new Tuple<int, int, double>(0, 0, 0);
-            if (EndA.Item1 == 0 || EndA.Item2 == 0) End = false;
+            End = !(EndA.Item1 == 0 || EndA.Item2 == 0);
             this.LeftA = new Armour(LeftA.Item1, LeftA.Item2);
             this.RightA = new Armour(RightA.Item1, RightA.Item2);
             this.EndA = new Armour(EndA.Item1, EndA.Item2);

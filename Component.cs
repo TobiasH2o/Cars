@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cars
 {
-    internal class Component
+    public class Component
     {
         public int Width { get; private set; }
 

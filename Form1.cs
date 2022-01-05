@@ -16,6 +16,7 @@ namespace Cars
         {
             InitializeComponent();
             Vehicle v = new Vehicle();
+            new CarView(v).Show();
         }
     }
 }

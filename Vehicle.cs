@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Cars
 {
-    internal class Vehicle
+    public class Vehicle
     {
-        private Section For;
-        private Section Mid;
-        private Section Rear;
+        public Section For { get; private set; }
+        public Section Mid { get; private set; }
+        public Section Rear { get; private set; }
 
         public Vehicle()
         {

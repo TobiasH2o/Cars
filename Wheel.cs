@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cars
 {
-    internal class Wheel : Component
+    public class Wheel : Component
     {
         public double SpeedModifier { get; protected set; }
 
