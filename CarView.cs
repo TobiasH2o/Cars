@@ -17,6 +17,8 @@ namespace Cars
         private int SquareSize = 18;
         private int SquareSpacing = 5;
         private int SectorSpacing = 2;
+        private static readonly int WIDTH = 1;
+        private static readonly int HEIGHT = 1;
 
         public CarView(Vehicle vehicle)
         {
@@ -44,42 +46,58 @@ namespace Cars
 
         public void InitialRender()
         {
+            // Armour
             Controls.Clear();
-            // Forward
             int DefaultY = (Height / 2) - ((vehicle.For.EndA.Height * (SquareSize + SquareSize / SquareSpacing)) / 2) - SquareSize / 2;
             int yOffset = DefaultY;
             int xOffset = EdgeSpacing;
             // Forward
-            if (vehicle.For.End)
-                InitializeArmour(vehicle.For.EndA, xOffset, yOffset);
+            InitializeVisualComponent(vehicle.For.EndA, vehicle.Height, 0, xOffset, yOffset);
             // Right
             xOffset += vehicle.For.EndA.Width * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            InitializeArmour(vehicle.For.RightA, xOffset, yOffset);
+            InitializeVisualComponent(vehicle.For.RightA, vehicle.For.Width, 1, xOffset, yOffset);
             // Left
             yOffset += (vehicle.For.EndA.Height - vehicle.For.LeftA.Height) * (SquareSize + SquareSize / SquareSpacing);
-            InitializeArmour(vehicle.For.LeftA, xOffset, yOffset);
+            InitializeVisualComponent(vehicle.For.LeftA, vehicle.For.Width, 1, xOffset, yOffset);
             // Mid
             xOffset += vehicle.For.Width * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            InitializeArmour(vehicle.Mid.RightA, xOffset, DefaultY);
-            InitializeArmour(vehicle.Mid.LeftA, xOffset, yOffset);
+            InitializeVisualComponent(vehicle.Mid.RightA, vehicle.Mid.Width, 1, xOffset, DefaultY);
+            InitializeVisualComponent(vehicle.Mid.LeftA, vehicle.Mid.Width, 1, xOffset, yOffset);
             // Rear
             xOffset += vehicle.Mid.Width * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            InitializeArmour(vehicle.Rear.RightA, xOffset, DefaultY);
-            InitializeArmour(vehicle.Rear.LeftA, xOffset, yOffset);
+            InitializeVisualComponent(vehicle.Rear.RightA, vehicle.Rear.Width, 1, xOffset, DefaultY);
+            InitializeVisualComponent(vehicle.Rear.LeftA, vehicle.Rear.Width, 1, xOffset, yOffset);
             xOffset += vehicle.Rear.Width * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            InitializeArmour(vehicle.Rear.EndA, xOffset, DefaultY);
+            InitializeVisualComponent(vehicle.Rear.EndA, vehicle.Height, 0, xOffset, DefaultY);
+
+            // Weapons
+
+            // Forward
+            xOffset = EdgeSpacing + (vehicle.For.EndA.Width * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing);
+            yOffset = vehicle.For.RightA.Height * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+
+            foreach (WeaponSlot Slot in vehicle.For.Weapons)
+            {
+                InitializeVisualComponent(Slot, Slot.Width, WIDTH, xOffset, yOffset);
+            }
+
+            // Forward weapons
         }
 
-        private void InitializeArmour(Armour armour, int xOffset, int yOffset)
+        private void InitializeVisualComponent(VisualComponent component, int targetLength, int targetDirection, int xOffset, int yOffset)
         {
             int SquareCount = 0;
-            armour.ClearHealthSquares();
-            for (int x = 0; x < armour.Width; x++)
+            component.ClearHealthSquares();
+            if (targetDirection == WIDTH)
+                xOffset += (targetLength - component.Width) * (SquareSize + SquareSize / SquareSpacing) / 2;
+            else
+                yOffset += (targetLength - component.Height) * (SquareSize + SquareSize / SquareSpacing) / 2;
+            for (int x = 0; x < component.Width; x++)
             {
-                for (int y = 0; y < armour.Height; y++)
+                for (int y = 0; y < component.Height; y++)
                 {
                     PictureBox square = new PictureBox();
-                    if (SquareCount < armour.DamagedHealth)
+                    if (SquareCount < component.DamagedHealth)
                         square.BackColor = Color.RosyBrown;
                     else square.BackColor = Color.GhostWhite;
                     SquareCount++;
@@ -87,7 +105,7 @@ namespace Cars
                     square.Size = new Size(SquareSize, SquareSize);
                     square.Visible = true;
                     Controls.Add(square);
-                    armour.AddHealthSquare(square);
+                    component.AddHealthSquare(square);
                 }
             }
         }

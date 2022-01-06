@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Cars
 {
-    internal class WeaponSlot : Component
+    public class WeaponSlot : VisualComponent
     {
-        public bool traps { get; protected set; }
-        public bool turret { get; protected set; }
+        public int Xpos { get; private set; }
+        public int Ypos { get; private set; }
 
-        public WeaponSlot(int Width, int Height) : base(Width, Height)
+        public WeaponSlot(int Width, int Height, int Xpos, int Ypos) : base(Width, Height)
         {
+            this.Xpos = Xpos;
+            this.Ypos = Ypos;
         }
     }
 }

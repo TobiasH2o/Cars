@@ -16,6 +16,9 @@ namespace Cars
 
         public Vehicle()
         {
+            List<WeaponSlot> Weapons = new List<WeaponSlot>() {
+            new WeaponSlot(3,3,2,2)
+            };
             For = new Section(
                 LeftA: new Tuple<int, int>(8, 2),
                 RightA: new Tuple<int, int>(8, 2),
