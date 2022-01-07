@@ -13,6 +13,7 @@ namespace Cars
         public Section Rear { get; private set; }
         public int Height { get; private set; } = -1;
         public int Width { get; private set; } = -1;
+        public CarComponent Driver { get; private set; }
 
         public Vehicle()
         {
@@ -22,7 +23,7 @@ namespace Cars
             };
             List<WeaponSlot> Weapons2 = new List<WeaponSlot>() {
             new WeaponSlot(3,3,0,0, "Turret B"),
-            new WeaponSlot(4,2,0,0, "Weapon Pod B")
+            new WeaponSlot(4,2,2,5, "Weapon Pod B")
             };
             List<WeaponSlot> Weapons3 = new List<WeaponSlot>() {
             new WeaponSlot(2,5,5,0, "Weapon Pod C")

@@ -67,6 +67,7 @@
     <Compile Include="TerrainBase.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VisualComponent.cs" />
+    <Compile Include="CarComponent.cs" />
     <Compile Include="WeaponSlot.cs" />
     <Compile Include="Wheel.cs" />
     <EmbeddedResource Include="CarView.resx">
