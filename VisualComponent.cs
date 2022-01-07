@@ -11,10 +11,13 @@ namespace Cars
     public class VisualComponent : Component
     {
         private List<PictureBox> HealthSquares;
+        public bool Named { get; protected set; } = true;
+        public string Name = "";
 
-        public VisualComponent(int width, int height) : base(width, height)
+        public VisualComponent(int width, int height, string name) : base(width, height)
         {
             HealthSquares = new List<PictureBox>(width * height);
+            Name = name;
         }
 
         public new void Damage(double DamageDealt)

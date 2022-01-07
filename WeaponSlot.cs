@@ -11,7 +11,7 @@ namespace Cars
         public int Xpos { get; private set; }
         public int Ypos { get; private set; }
 
-        public WeaponSlot(int Width, int Height, int Xpos, int Ypos) : base(Width, Height)
+        public WeaponSlot(int Width, int Height, int Xpos, int Ypos, string name) : base(Width, Height, name)
         {
             this.Xpos = Xpos;
             this.Ypos = Ypos;

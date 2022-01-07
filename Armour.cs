@@ -9,9 +9,10 @@ namespace Cars
 {
     public class Armour : VisualComponent
     {
-        public Armour(int Width, int Height) : base(Width, Height)
+        public Armour(int Width, int Height) : base(Width, Height, "")
 
         {
+            Named = false;
         }
     }
 }
