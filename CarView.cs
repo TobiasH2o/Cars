@@ -11,7 +11,7 @@ namespace Cars
         private int SquareSize = 18;
         private int SquareSpacing = 5;
         private int SectorSpacing = 3;
-        private readonly int BufferSize = 10;
+        private int BufferSize = 1;
         private static readonly int WIDTH = 1;
         private static readonly int HEIGHT = 0;
 
@@ -19,17 +19,19 @@ namespace Cars
         {
             this.vehicle = vehicle;
             InitializeComponent();
-            CalculateSquareSize();
-            InitialRender();
+            RenderVehicle();
         }
 
         public void CalculateSquareSize()
         {
+            int.TryParse(BufferSizeBox.Text, out int i);
+            if (i <= 0) BufferSizeBox.Text = BufferSize.ToString();
+            else BufferSize = i;
             int CarWidth = vehicle.Width;
             int CarHeight = vehicle.Height;
             int SquareTest = 2;
-            int HeightLimit = Height - BufferSize;
-            int WidthLimit = Width - BufferSize;
+            int HeightLimit = VehicleBox.Height - BufferSize;
+            int WidthLimit = VehicleBox.Width - BufferSize;
 
             while (CarHeight * (SquareTest + SquareTest / SquareSpacing) < HeightLimit && CarWidth * (SquareTest + SquareTest / SquareSpacing) + 2 * (SquareTest / SectorSpacing) < WidthLimit)
                 SquareTest += 2;
@@ -42,27 +44,31 @@ namespace Cars
             InitY = (HeightLimit / 2 - CarHeight * (SquareTest + SquareTest / SquareSpacing) / 2);
         }
 
-        public void InitialRender()
+        public void RenderVehicle()
         {
+            CalculateSquareSize();
             // Armour
-            Controls.Clear();
+            VehicleBox.Controls.Clear();
             int yOffset = InitY;
             int xOffset = InitX;
+            double BlocksPlaced = 0;
             // Forward
             InitializeVisualComponent(vehicle.For.EndA, vehicle.Height, HEIGHT, xOffset, yOffset);
             xOffset += vehicle.For.EndA.Width * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            InitializeVisualComponent(vehicle.For.RightA, vehicle.For.Width, WIDTH, xOffset, yOffset);
-            yOffset += (vehicle.For.EndA.Height - vehicle.For.LeftA.Height) * (SquareSize + SquareSize / SquareSpacing);
-            InitializeVisualComponent(vehicle.For.LeftA, vehicle.For.Width, WIDTH, xOffset, yOffset);
+            InitializeVisualComponent(vehicle.For.RightA, vehicle.For.Width - vehicle.For.EndA.Width, WIDTH, xOffset, yOffset);
+            yOffset += (vehicle.For.Height - vehicle.For.LeftA.Height) * (SquareSize + SquareSize / SquareSpacing);
+            InitializeVisualComponent(vehicle.For.LeftA, vehicle.For.Width - vehicle.For.EndA.Width, WIDTH, xOffset, yOffset);
+            BlocksPlaced += vehicle.For.Width + 2.00d / SectorSpacing;
             // Mid
-            xOffset += vehicle.For.Width * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+            xOffset = (int)(InitX + BlocksPlaced * (SquareSize + SquareSize / SquareSpacing));
             InitializeVisualComponent(vehicle.Mid.RightA, vehicle.Mid.Width, WIDTH, xOffset, InitY);
             InitializeVisualComponent(vehicle.Mid.LeftA, vehicle.Mid.Width, WIDTH, xOffset, yOffset);
+            BlocksPlaced += vehicle.Mid.Width + 1.00d / SectorSpacing;
             // Rear
-            xOffset += vehicle.Mid.Width * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            InitializeVisualComponent(vehicle.Rear.RightA, vehicle.Rear.Width, WIDTH, xOffset, InitY);
-            InitializeVisualComponent(vehicle.Rear.LeftA, vehicle.Rear.Width, WIDTH, xOffset, yOffset);
-            xOffset += vehicle.Rear.Width * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+            xOffset = (int)(InitX + BlocksPlaced * (SquareSize + SquareSize / SquareSpacing));
+            InitializeVisualComponent(vehicle.Rear.RightA, vehicle.Rear.Width - vehicle.Rear.EndA.Width, WIDTH, xOffset, InitY);
+            InitializeVisualComponent(vehicle.Rear.LeftA, vehicle.Rear.Width - vehicle.Rear.EndA.Width, WIDTH, xOffset, yOffset);
+            xOffset += (vehicle.Rear.Width - vehicle.Rear.EndA.Width) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
             InitializeVisualComponent(vehicle.Rear.EndA, vehicle.Height, HEIGHT, xOffset, InitY);
 
             // Weapons
@@ -72,22 +78,28 @@ namespace Cars
             yOffset = InitY + (vehicle.Mid.RightA.Height) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
             foreach (WeaponSlot Slot in vehicle.For.Weapons)
             {
-                InitializeVisualComponent(Slot, Slot.Width, WIDTH, xOffset + (Slot.Xpos * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing), yOffset + (Slot.Ypos * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing));
+                int xPosition = (Slot.Xpos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+                int yPosition = (Slot.Ypos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+                InitializeVisualComponent(Slot, Slot.Width, WIDTH, xOffset + xPosition, yOffset + yPosition);
             }
             // Mid
-            xOffset = InitX + vehicle.For.Width * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+            xOffset = InitX + (vehicle.For.Width) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
             yOffset = InitY + vehicle.Mid.RightA.Height * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
             foreach (WeaponSlot Slot in vehicle.Mid.Weapons)
             {
-                InitializeVisualComponent(Slot, Slot.Width, WIDTH, xOffset, yOffset);
+                int xPosition = (Slot.Xpos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+                int yPosition = (Slot.Ypos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+                InitializeVisualComponent(Slot, Slot.Width, WIDTH, xOffset + xPosition, yOffset + yPosition);
             }
-            // Rear
-            xOffset = InitX + (vehicle.Mid.Width + vehicle.For.Width) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            yOffset = InitY + vehicle.Rear.RightA.Height * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            foreach (WeaponSlot Slot in vehicle.Rear.Weapons)
-            {
-                InitializeVisualComponent(Slot, Slot.Width, WIDTH, xOffset, yOffset);
-            }
+            /*            // Rear
+                        xOffset = InitX + (vehicle.Mid.Width + vehicle.For.Width) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+                        yOffset = InitY + vehicle.Rear.RightA.Height * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+                        foreach (WeaponSlot Slot in vehicle.Rear.Weapons)
+                        {
+                            int xPosition = (Slot.Xpos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+                            int yPosition = (Slot.Ypos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+                            InitializeVisualComponent(Slot, Slot.Width, WIDTH, xOffset + xPosition, yOffset + yPosition);
+                        }*/
         }
 
         private void InitializeVisualComponent(VisualComponent component, int targetLength, int targetDirection, int xOffset, int yOffset)
@@ -111,7 +123,7 @@ namespace Cars
                     square.Location = new Point((x * (SquareSize + SquareSize / SquareSpacing)) + xOffset, (y * (SquareSize + SquareSize / SquareSpacing)) + yOffset);
                     square.Size = new Size(SquareSize, SquareSize);
                     square.Visible = true;
-                    Controls.Add(square);
+                    VehicleBox.Controls.Add(square);
                     component.AddHealthSquare(square);
                 }
             }
@@ -121,14 +133,19 @@ namespace Cars
                 Label.Text = component.Name;
                 Label.Location = new Point(xOffset + (component.Width * (SquareSize + SquareSize / SquareSpacing) / 2 - Label.PreferredWidth / 2), yOffset + (component.Height * (SquareSize + SquareSize / SquareSpacing)));
                 Label.Visible = true;
-                Controls.Add(Label);
+                VehicleBox.Controls.Add(Label);
             }
             PictureBox Background = new PictureBox();
             Background.BackColor = Color.DarkSlateGray;
             Background.Location = new Point(xOffset - SquareSize / (4 * SectorSpacing), yOffset - SquareSize / (4 * SectorSpacing));
             Background.Size = new Size(component.Width * (SquareSize + SquareSize / SquareSpacing), component.Height * (SquareSize + SquareSize / SquareSpacing));
             Background.Visible = true;
-            Controls.Add(Background);
+            VehicleBox.Controls.Add(Background);
+        }
+
+        private void toolStripButton1_Click(object sender, System.EventArgs e)
+        {
+            RenderVehicle();
         }
     }
 }
