@@ -39,7 +39,7 @@ namespace Cars
             this.MapBox.Size = new System.Drawing.Size(1247, 636);
             this.MapBox.TabIndex = 0;
             this.MapBox.TabStop = false;
-            this.MapBox.Text = "Map Box";
+            this.MapBox.Text = "Game Map";
             this.MapBox.Paint += new System.Windows.Forms.PaintEventHandler(this.MapBox_Paint);
             // 
             // Map
