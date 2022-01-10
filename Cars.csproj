@@ -66,12 +66,14 @@
     <Compile Include="Map.Designer.cs">
       <DependentUpon>Map.cs</DependentUpon>
     </Compile>
+    <Compile Include="MapComponent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Section.cs" />
     <Compile Include="Terrain.cs" />
     <Compile Include="TerrainBase.cs" />
     <Compile Include="Vehicle.cs" />
+    <Compile Include="VehicleTypes.cs" />
     <Compile Include="VisualComponent.cs" />
     <Compile Include="WeaponSlot.cs" />
     <Compile Include="Wheel.cs" />
