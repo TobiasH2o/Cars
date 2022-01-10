@@ -77,7 +77,7 @@ namespace Cars
             // Forward
             xOffset = InitX + (vehicle.For.EndA.Width) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
             yOffset = InitY + (vehicle.Mid.RightA.Height) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            foreach (WeaponSlot Slot in vehicle.For.Weapons)
+            foreach (CarComponent Slot in vehicle.For.Weapons)
             {
                 int xPosition = (Slot.Xpos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
                 int yPosition = (Slot.Ypos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
@@ -86,21 +86,21 @@ namespace Cars
             // Mid
             xOffset = InitX + (vehicle.For.Width) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
             yOffset = InitY + vehicle.Mid.RightA.Height * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            foreach (WeaponSlot Slot in vehicle.Mid.Weapons)
+            foreach (CarComponent Slot in vehicle.Mid.Weapons)
             {
                 int xPosition = (Slot.Xpos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
                 int yPosition = (Slot.Ypos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
                 InitializeVisualComponent(Slot, Slot.Width, WIDTH, xOffset + xPosition, yOffset + yPosition);
             }
-            /*            // Rear
-                        xOffset = InitX + (vehicle.Mid.Width + vehicle.For.Width) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-                        yOffset = InitY + vehicle.Rear.RightA.Height * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-                        foreach (WeaponSlot Slot in vehicle.Rear.Weapons)
-                        {
-                            int xPosition = (Slot.Xpos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-                            int yPosition = (Slot.Ypos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-                            InitializeVisualComponent(Slot, Slot.Width, WIDTH, xOffset + xPosition, yOffset + yPosition);
-                        }*/
+            // Rear
+            xOffset = InitX + (vehicle.Mid.Width + vehicle.For.Width) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+            yOffset = InitY + vehicle.Rear.RightA.Height * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+            foreach (CarComponent Slot in vehicle.Rear.Weapons)
+            {
+                int xPosition = (Slot.Xpos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+                int yPosition = (Slot.Ypos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
+                InitializeVisualComponent(Slot, Slot.Width, WIDTH, xOffset + xPosition, yOffset + yPosition);
+            }
         }
 
         private void InitializeVisualComponent(VisualComponent component, int targetLength, int targetDirection, int xOffset, int yOffset)
