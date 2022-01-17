@@ -16,14 +16,14 @@ namespace Cars
         public Armour EndA;
         public Wheel LeftW;
         public Wheel RightW;
-        public List<WeaponSlot> Weapons;
+        public List<WeaponSlot> WeaponSlots;
 
-        public Section(Tuple<int, int> LeftA, Tuple<int, int> RightA, Tuple<int, int, double> LeftW = null, Tuple<int, int, double> RightW = null, Tuple<int, int> EndA = null, int? Width = null, List<WeaponSlot> Weapons = null, int? Height = null)
+        public Section(Tuple<int, int> LeftA, Tuple<int, int> RightA, Tuple<int, int, double> LeftW = null, Tuple<int, int, double> RightW = null, Tuple<int, int> EndA = null, int? Width = null, List<WeaponSlot> WeaponSlots = null, int? Height = null)
         {
             EndA = EndA ?? new Tuple<int, int>(0, 0);
             LeftW = LeftW ?? new Tuple<int, int, double>(0, 0, 0);
             RightW = RightW ?? new Tuple<int, int, double>(0, 0, 0);
-            Weapons = Weapons ?? new List<WeaponSlot>(0);
+            WeaponSlots = WeaponSlots ?? new List<WeaponSlot>(0);
             End = !(EndA.Item1 == 0 || EndA.Item2 == 0);
             this.LeftA = new Armour(LeftA.Item1, LeftA.Item2);
             this.RightA = new Armour(RightA.Item1, RightA.Item2);
@@ -32,7 +32,7 @@ namespace Cars
             this.RightW = new Wheel(RightW.Item1, RightW.Item2, RightW.Item3);
             this.Width = Width ?? (Math.Max(LeftA.Item1, RightA.Item1) + this.EndA.Width);
             this.Height = Height ?? Math.Max(this.LeftA.Height, Math.Max(this.RightA.Height, this.EndA.Height));
-            this.Weapons = Weapons;
+            this.WeaponSlots = WeaponSlots;
         }
     }
 }

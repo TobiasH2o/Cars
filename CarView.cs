@@ -72,12 +72,12 @@ namespace Cars
             xOffset += (vehicle.Rear.Width - vehicle.Rear.EndA.Width) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
             InitializeVisualComponent(vehicle.Rear.EndA, vehicle.Height, HEIGHT, xOffset, InitY);
 
-            // Weapons
+            // WeaponSlots
 
             // Forward
             xOffset = InitX + (vehicle.For.EndA.Width) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
             yOffset = InitY + (vehicle.Mid.RightA.Height) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            foreach (CarComponent Slot in vehicle.For.Weapons)
+            foreach (CarComponent Slot in vehicle.For.WeaponSlots)
             {
                 int xPosition = (Slot.Xpos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
                 int yPosition = (Slot.Ypos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
@@ -86,7 +86,7 @@ namespace Cars
             // Mid
             xOffset = InitX + (vehicle.For.Width) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
             yOffset = InitY + vehicle.Mid.RightA.Height * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            foreach (CarComponent Slot in vehicle.Mid.Weapons)
+            foreach (CarComponent Slot in vehicle.Mid.WeaponSlots)
             {
                 int xPosition = (Slot.Xpos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
                 int yPosition = (Slot.Ypos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
@@ -95,7 +95,7 @@ namespace Cars
             // Rear
             xOffset = InitX + (vehicle.Mid.Width + vehicle.For.Width) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
             yOffset = InitY + vehicle.Rear.RightA.Height * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
-            foreach (CarComponent Slot in vehicle.Rear.Weapons)
+            foreach (CarComponent Slot in vehicle.Rear.WeaponSlots)
             {
                 int xPosition = (Slot.Xpos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;
                 int yPosition = (Slot.Ypos) * (SquareSize + SquareSize / SquareSpacing) + SquareSize / SectorSpacing;

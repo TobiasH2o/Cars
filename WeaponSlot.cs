@@ -8,8 +8,11 @@ namespace Cars
 {
     public class WeaponSlot : CarComponent
     {
-        public WeaponSlot(int Width, int Height, int Xpos, int Ypos, string Name) : base(Width, Height, Xpos, Ypos, Name)
+        private List<Weapon> Weapons;
+
+        public WeaponSlot(int Width, int Height, int Xpos, int Ypos, string Name, List<Weapon> Weapons) : base(Width, Height, Xpos, Ypos, Name)
         {
+            this.Weapons = Weapons;
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cars
 {
@@ -18,15 +15,15 @@ namespace Cars
         public Vehicle()
         {
             List<WeaponSlot> Weapons = new List<WeaponSlot>() {
-            new WeaponSlot(3,3,0,0, "Turret A"),
-            new WeaponSlot(4,2,1,5, "Weapon Pod A")
+            new WeaponSlot(3,3,0,0, "Turret A", new List<Weapon>{new Weapon(3, 6, 1, 2)}),
+            new WeaponSlot(4,2,1,5, "Weapon Pod A", null)
             };
             List<WeaponSlot> Weapons2 = new List<WeaponSlot>() {
-            new WeaponSlot(3,3,0,0, "Turret B"),
-            new WeaponSlot(4,2,2,5, "Weapon Pod B")
+            new WeaponSlot(3,3,0,0, "Turret B", null),
+            new WeaponSlot(4,2,2,5, "Weapon Pod B", null)
             };
             List<WeaponSlot> Weapons3 = new List<WeaponSlot>() {
-            new WeaponSlot(2,5,5,0, "Weapon Pod C")
+            new WeaponSlot(2,5,5,0, "Weapon Pod C", null)
             };
             For = new Section(
                 LeftA: new Tuple<int, int>(6, 2),
@@ -34,19 +31,19 @@ namespace Cars
                 LeftW: new Tuple<int, int, double>(2, 1, 0.15),
                 RightW: new Tuple<int, int, double>(2, 1, 0.15),
                 EndA: new Tuple<int, int>(2, 10),
-                Weapons: Weapons,
+                WeaponSlots: Weapons,
                 Height: 12);
             Mid = new Section(
                 LeftA: new Tuple<int, int>(7, 2),
                 RightA: new Tuple<int, int>(7, 2),
-                Weapons: Weapons2);
+                WeaponSlots: Weapons2);
             Rear = new Section(
                 LeftA: new Tuple<int, int>(7, 2),
                 RightA: new Tuple<int, int>(7, 1),
                 LeftW: new Tuple<int, int, double>(3, 2, 0.15),
                 RightW: new Tuple<int, int, double>(3, 2, 0.15),
                 EndA: new Tuple<int, int>(1, 8),
-                Weapons: Weapons3);
+                WeaponSlots: Weapons3);
             Height = Math.Max(For.Height, Math.Max(Mid.Height, Rear.Height));
             Width = For.Width + Mid.Width + Rear.Width;
         }

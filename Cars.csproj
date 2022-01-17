@@ -76,6 +76,7 @@
     <Compile Include="VehicleTypes.cs" />
     <Compile Include="VisualComponent.cs" />
     <Compile Include="CarComponent.cs" />
+    <Compile Include="Weapon.cs" />
     <Compile Include="WeaponSlot.cs" />
     <Compile Include="Wheel.cs" />
     <EmbeddedResource Include="CarView.resx">
