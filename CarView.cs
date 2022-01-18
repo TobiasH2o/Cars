@@ -62,12 +62,15 @@ namespace Cars
             InitializeVisualComponent(vehicle.For.RightA, vehicle.For.Width - vehicle.For.EndA.Width, WIDTH, xOffset, yOffset, g);
             yOffset += (vehicle.For.Height - vehicle.For.LeftA.Height) * (SquareSize + SquareSize / SquareSpacing);
             InitializeVisualComponent(vehicle.For.LeftA, vehicle.For.Width - vehicle.For.EndA.Width, WIDTH, xOffset, yOffset, g);
-            BlocksPlaced += vehicle.For.Width + 2.00d / SectorSpacing;
+            BlocksPlaced += vehicle.For.Width + 2.50d / SectorSpacing;
+            int MiddlePoint = (int)(InitX + (BlocksPlaced - (1.1d / SectorSpacing)) * (SquareSize + (SquareSize / SquareSpacing)));
+            g.DrawLine(new Pen(Color.Black, 1), MiddlePoint, 0, MiddlePoint, Height);
             // Mid
             xOffset = (int)(InitX + BlocksPlaced * (SquareSize + SquareSize / SquareSpacing));
             InitializeVisualComponent(vehicle.Mid.RightA, vehicle.Mid.Width, WIDTH, xOffset, InitY, g);
             InitializeVisualComponent(vehicle.Mid.LeftA, vehicle.Mid.Width, WIDTH, xOffset, yOffset, g);
             BlocksPlaced += vehicle.Mid.Width + 1.00d / SectorSpacing;
+            BlocksPlaced += 1;
             // Rear
             xOffset = (int)(InitX + BlocksPlaced * (SquareSize + SquareSize / SquareSpacing));
             InitializeVisualComponent(vehicle.Rear.RightA, vehicle.Rear.Width - vehicle.Rear.EndA.Width, WIDTH, xOffset, InitY, g);
