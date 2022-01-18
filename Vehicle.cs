@@ -32,7 +32,7 @@ namespace Cars
                 RightW: new Tuple<int, int, double>(2, 1, 0.15),
                 EndA: new Tuple<int, int>(2, 10),
                 WeaponSlots: Weapons,
-                Height: 12);
+                Height: 13);
             Mid = new Section(
                 LeftA: new Tuple<int, int>(7, 2),
                 RightA: new Tuple<int, int>(7, 2),

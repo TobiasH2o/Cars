@@ -32,8 +32,8 @@ namespace Cars
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CarView));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.VehicleBox = new System.Windows.Forms.GroupBox();
             this.BufferSizeBox = new System.Windows.Forms.ToolStripTextBox();
+            this.VehicleBox = new System.Windows.Forms.GroupBox();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +58,12 @@ namespace Cars
             this.toolStripButton1.Text = "Reload Render";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
+            // BufferSizeBox
+            // 
+            this.BufferSizeBox.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.BufferSizeBox.Name = "BufferSizeBox";
+            this.BufferSizeBox.Size = new System.Drawing.Size(100, 25);
+            // 
             // VehicleBox
             // 
             this.VehicleBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -69,12 +75,7 @@ namespace Cars
             this.VehicleBox.TabIndex = 1;
             this.VehicleBox.TabStop = false;
             this.VehicleBox.Text = "Vehicle";
-            // 
-            // BufferSizeBox
-            // 
-            this.BufferSizeBox.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.BufferSizeBox.Name = "BufferSizeBox";
-            this.BufferSizeBox.Size = new System.Drawing.Size(100, 25);
+            this.VehicleBox.Paint += new System.Windows.Forms.PaintEventHandler(this.VehicleBox_Paint);
             // 
             // CarView
             // 
